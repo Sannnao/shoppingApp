@@ -1,18 +1,33 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './index.css';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import { Root } from "routes/root";
+import { Card } from "components/Card";
+import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import { ProductsList } from "components/ProductsList";
 
-const container = document.getElementById('root')!;
+const container = document.getElementById("root")!;
 const root = createRoot(container);
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [{ index: true, element: <ProductsList /> }],
+  },
+  {
+    path: "/card",
+    element: <Card />,
+  },
+]);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );

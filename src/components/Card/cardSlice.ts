@@ -17,13 +17,36 @@ export const cardSlice = createSlice({
     products: initialState,
   },
   reducers: {
-    addProduct: (state, action: PayloadAction<ProductItem>) => {
-      state.products.push(action.payload);
+    addProduct: (state, action: PayloadAction<Product>) => {
+      const item = state.products.find(
+        (product) => product.product.id === action.payload.id
+      );
+
+      if (item) {
+        item.amount++;
+      } else {
+        state.products.push({ product: action.payload, amount: 1 });
+      }
+    },
+    removeProduct: (state, action: PayloadAction<{ id: number }>) => {
+      const product = state.products.find(
+        (product) => product.product.id === action.payload.id
+      );
+
+      if (product) {
+        if (product.amount === 1) {
+          state.products = state.products.filter(
+            (product) => product.product.id !== action.payload.id
+          );
+        } else {
+          product.amount--;
+        }
+      }
     },
   },
 });
 
-export const { addProduct } = cardSlice.actions;
+export const { addProduct, removeProduct } = cardSlice.actions;
 
 export const selectProducts = (state: RootState) => state.card.products;
 export const selectProductsAmount = (state: RootState) =>

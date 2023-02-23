@@ -14,8 +14,13 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import TextField from "@mui/material/TextField";
 import { TrunkText } from "components/TruncText";
-import { useAppDispatch } from "app/hooks";
-import { addProduct } from "components/Card/cardSlice";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import {
+  addProduct,
+  removeProduct,
+  selectProducts,
+} from "components/Card/cardSlice";
+import { formatAsPrice } from "utils";
 
 export type Product = {
   id: number;
@@ -31,12 +36,14 @@ type ProductItemProps = { product: Product };
 
 export const ProductItem = ({ product }: ProductItemProps) => {
   const dispatch = useAppDispatch();
+  const products = useAppSelector(selectProducts);
+  const foundProduct = products.find((item) => item.product.id === product.id);
+  const productAmount = foundProduct ? foundProduct.amount : 0;
   const descriptionTrunkRef = useRef<HTMLSpanElement | null>(null);
   const [descriptionHeight, setDescriptionHeight] = useState<null | number>(
     null
   );
   const [expanded, setExpanded] = useState(false);
-  const [productsAmount, setProductsAmount] = useState(0);
 
   useLayoutEffect(() => {
     if (descriptionTrunkRef?.current) {
@@ -56,20 +63,6 @@ export const ProductItem = ({ product }: ProductItemProps) => {
     price,
     rating: { rate, count },
   } = product;
-
-  const increaseProductAmount = () => {
-    setProductsAmount((prev) => prev + 1);
-  };
-
-  const decreaseProductAmount = () => {
-    setProductsAmount((prev) => {
-      if (prev) {
-        return prev - 1;
-      }
-
-      return prev;
-    });
-  };
 
   return (
     <Card>
@@ -154,7 +147,7 @@ export const ProductItem = ({ product }: ProductItemProps) => {
         </Box>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h5" component={"h5"} color="text.secondary">
-            {price} $
+            {formatAsPrice(price)}
           </Typography>
 
           <Typography variant="h5" component={"h5"} color="text.secondary">
@@ -170,46 +163,21 @@ export const ProductItem = ({ product }: ProductItemProps) => {
             display: "flex",
             flexGrow: 1,
             justifyContent: "center",
-            "& .MuiTextField-root": {
-              margin: "0 5px",
-            },
+            alignItems: "center",
           }}
         >
           <IconButton
             aria-label="remove product"
-            onClick={decreaseProductAmount}
+            onClick={() => dispatch(removeProduct({ id: product.id }))}
           >
             <RemoveIcon />
           </IconButton>
-          <TextField
-            size="small"
-            variant="outlined"
-            value={productsAmount}
-            onChange={(e) => {
-              const value = +e.target.value;
-              if (value) {
-                setProductsAmount(value);
-              } else {
-                setProductsAmount(0);
-              }
-            }}
-            sx={{
-              "& .MuiInputBase-input": {
-                width: "20px",
-                textAlign: "center",
-              },
-            }}
-          />
-          <IconButton aria-label="add product" onClick={increaseProductAmount}>
-            <AddIcon />
-          </IconButton>
+          <Typography variant="h6">{productAmount}</Typography>
           <IconButton
-            aria-label="add to card"
-            onClick={() =>
-              dispatch(addProduct({ product, amount: productsAmount }))
-            }
+            aria-label="add product"
+            onClick={() => dispatch(addProduct(product))}
           >
-            <ShoppingCartIcon />
+            <AddIcon />
           </IconButton>
         </Box>
       </CardActions>
