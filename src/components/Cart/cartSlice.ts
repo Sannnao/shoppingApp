@@ -11,8 +11,8 @@ type ProductState = ProductItem[];
 
 const initialState: ProductState = [];
 
-export const cardSlice = createSlice({
-  name: "cardSlice",
+export const cartSlice = createSlice({
+  name: "cartSlice",
   initialState: {
     products: initialState,
   },
@@ -46,10 +46,10 @@ export const cardSlice = createSlice({
   },
 });
 
-export const { addProduct, removeProduct } = cardSlice.actions;
+export const { addProduct, removeProduct } = cartSlice.actions;
 
-export const selectProducts = (state: RootState) => state.card.products;
+export const selectProducts = (state: RootState) => state.cart.products;
 export const selectProductsAmount = (state: RootState) =>
-  state.card.products.reduce((acc, product) => acc + product.amount, 0);
+  state.cart.products.reduce((acc, product) => acc + product.amount, 0);
 
-export default cardSlice.reducer;
+export default cartSlice.reducer;

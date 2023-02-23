@@ -19,7 +19,7 @@ import {
   addProduct,
   removeProduct,
   selectProducts,
-} from "components/Card/cardSlice";
+} from "components/Cart/cartSlice";
 import { formatAsPrice } from "utils";
 
 export type Product = {

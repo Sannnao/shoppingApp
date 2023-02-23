@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import { Root } from "routes/root";
-import { Card } from "components/Card";
+import { Cart } from "components/Cart";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
@@ -16,11 +16,13 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    children: [{ index: true, element: <ProductsList /> }],
-  },
-  {
-    path: "/card",
-    element: <Card />,
+    children: [
+      { index: true, element: <ProductsList /> },
+      {
+        path: "/card",
+        element: <Cart />,
+      },
+    ],
   },
 ]);
 

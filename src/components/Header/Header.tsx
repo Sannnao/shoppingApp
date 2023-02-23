@@ -4,7 +4,7 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAppSelector } from "app/hooks";
-import { selectProductsAmount } from "components/Card/cardSlice";
+import { selectProductsAmount } from "components/Cart/cartSlice";
 import { Link } from "react-router-dom";
 
 export const Header = () => {
