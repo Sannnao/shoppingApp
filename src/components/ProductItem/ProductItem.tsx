@@ -92,48 +92,60 @@ export const ProductItem = ({ product }: ProductItemProps) => {
           </Typography>
           <Rating value={rate} />
         </Box>
-        <Collapse
-          orientation="vertical"
-          collapsedSize={descriptionHeight!}
-          in={expanded}
-          timeout="auto"
-          sx={{ position: "relative" }}
-        >
-          <Typography
-            gutterBottom
-            variant="body2"
-            color="text.secondary"
-            sx={{
-              ...(!expanded ? { transition: "opacity 500ms" } : {}),
-              opacity: expanded ? 1 : 0,
-            }}
+        <Box sx={{ minHeight: "60px" }}>
+          <Collapse
+            orientation="vertical"
+            collapsedSize={descriptionHeight!}
+            in={expanded}
+            timeout="auto"
+            sx={{ position: "relative" }}
           >
-            {description}
-          </Typography>
-          <TrunkText
-            ref={descriptionTrunkRef}
-            gutterBottom
-            lines={3}
-            variant="body2"
-            color="text.secondary"
-            sx={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              ...(!expanded ? { transition: "opacity 500ms" } : {}),
-              opacity: expanded ? 0 : 1,
-            }}
-          >
-            {description}
-          </TrunkText>
-        </Collapse>
+            <Typography
+              gutterBottom
+              variant="body2"
+              color="text.secondary"
+              sx={{
+                ...(!expanded ? { transition: "opacity 500ms" } : {}),
+                opacity: expanded ? 1 : 0,
+              }}
+            >
+              {description}
+            </Typography>
+            <TrunkText
+              ref={descriptionTrunkRef}
+              gutterBottom
+              lines={3}
+              variant="body2"
+              color="text.secondary"
+              sx={{
+                position: "absolute",
+                left: 0,
+                top: 0,
+                ...(!expanded ? { transition: "opacity 500ms" } : {}),
+                opacity: expanded ? 0 : 1,
+              }}
+            >
+              {description}
+            </TrunkText>
+          </Collapse>
+        </Box>
+
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
           }}
         >
-          <Button size="small" onClick={toggleExpanded}>
+          <Button
+            size="small"
+            onClick={toggleExpanded}
+            sx={{
+              visibility:
+                descriptionHeight && descriptionHeight < 60
+                  ? "hidden"
+                  : "initial",
+            }}
+          >
             {expanded ? "See less" : "Learn More"}
           </Button>
         </Box>

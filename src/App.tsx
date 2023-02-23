@@ -1,11 +1,13 @@
-import Container from "@mui/material/Box";
+import Box from "@mui/material/Box";
+import { Header } from "components/Header";
 import { ProductsList } from "components/ProductsList";
 
 function App() {
   return (
-    <Container>
+    <Box>
+      <Header />
       <ProductsList />
-    </Container>
+    </Box>
   );
 }
 
