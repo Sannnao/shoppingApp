@@ -14,6 +14,8 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import TextField from "@mui/material/TextField";
 import { TrunkText } from "components/TruncText";
+import { useAppDispatch } from "app/hooks";
+import { addProduct } from "components/Card/cardSlice";
 
 export type Product = {
   id: number;
@@ -28,6 +30,7 @@ export type Product = {
 type ProductItemProps = { product: Product };
 
 export const ProductItem = ({ product }: ProductItemProps) => {
+  const dispatch = useAppDispatch();
   const descriptionTrunkRef = useRef<HTMLSpanElement | null>(null);
   const [descriptionHeight, setDescriptionHeight] = useState<null | number>(
     null
@@ -200,7 +203,12 @@ export const ProductItem = ({ product }: ProductItemProps) => {
           <IconButton aria-label="add product" onClick={increaseProductAmount}>
             <AddIcon />
           </IconButton>
-          <IconButton aria-label="add to card">
+          <IconButton
+            aria-label="add to card"
+            onClick={() =>
+              dispatch(addProduct({ product, amount: productsAmount }))
+            }
+          >
             <ShoppingCartIcon />
           </IconButton>
         </Box>
