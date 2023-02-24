@@ -15,6 +15,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import TextField from "@mui/material/TextField";
 import { TrunkText } from "components/TruncText";
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import { CartActions } from "components/CartActions";
 import {
   addProduct,
   removeProduct,
@@ -145,6 +146,8 @@ export const ProductItem = ({ product }: ProductItemProps) => {
             {expanded ? "See less" : "Learn More"}
           </Button>
         </Box>
+      </CardContent>
+      <CardContent sx={{ padding: "0 20px" }}>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h5" component={"h5"} color="text.secondary">
             {formatAsPrice(price)}
@@ -158,28 +161,7 @@ export const ProductItem = ({ product }: ProductItemProps) => {
       <CardActions
         sx={{ justifyContent: "space-between", marginBottom: "20px" }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexGrow: 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <IconButton
-            aria-label="remove product"
-            onClick={() => dispatch(removeProduct({ id: product.id }))}
-          >
-            <RemoveIcon />
-          </IconButton>
-          <Typography variant="h6">{productAmount}</Typography>
-          <IconButton
-            aria-label="add product"
-            onClick={() => dispatch(addProduct(product))}
-          >
-            <AddIcon />
-          </IconButton>
-        </Box>
+        <CartActions product={product} />
       </CardActions>
     </Card>
   );
