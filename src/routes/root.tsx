@@ -9,6 +9,7 @@ export const Root = () => {
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
+        height: "100vh",
         maxHeight: "100vh",
       }}
     >

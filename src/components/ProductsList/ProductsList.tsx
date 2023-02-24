@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Container";
 import { Spinner } from "components/Spinner";
 import { ProductItem, Product } from "components/ProductItem";
 
@@ -24,7 +25,17 @@ export const ProductsList = ({}: ProductsListProps) => {
   }, []);
 
   return isLoading ? (
-    <Spinner />
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <Spinner />
+    </Box>
   ) : (
     <Grid
       container
