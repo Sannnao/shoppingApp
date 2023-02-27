@@ -1,7 +1,5 @@
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Badge from "@mui/material/Badge";
-import IconButton from "@mui/material/IconButton";
+import { Box, Badge, IconButton, Link as MuiLink } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAppSelector } from "app/hooks";
 import { selectProductsAmount } from "components/Cart/cartSlice";
@@ -14,16 +12,16 @@ export const Header = () => {
   return (
     <AppBar position="static" component="header" sx={{ padding: "10px 30px" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Link to="/">
+        <MuiLink component={Link} to="/" underline="none" color="inherit">
           <Typography variant="h4">Shopping app</Typography>
-        </Link>
-        <Link to="card">
+        </MuiLink>
+        <MuiLink component={Link} to="card">
           <IconButton>
             <Badge badgeContent={productsAmount} color="error">
               <ShoppingCartIcon fontSize="large" />
             </Badge>
           </IconButton>
-        </Link>
+        </MuiLink>
       </Box>
     </AppBar>
   );

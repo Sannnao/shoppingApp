@@ -1,20 +1,27 @@
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
+import { Link } from "react-router-dom";
+import {
+  Box,
+  Avatar,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+  Link as MuiLink,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { selectCartProducts, selectTotalPrice, removeProducts } from "./cartSlice";
 import { formatAsPrice } from "utils";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
 import { CartActions } from "components/CartActions";
-import { Typography } from "@mui/material";
+import {
+  selectCartProducts,
+  selectTotalPrice,
+  removeProducts,
+} from "./cartSlice";
 
 const tableHeaderItems = ["Image", "Title", "Price", "Amount", "Remove"];
 
@@ -26,7 +33,10 @@ export const Cart = () => {
   return !products.length ? (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Typography variant="h6" color={"disabled"}>
-        You've got no items yet. You can start shoping <Link to="/">here</Link>
+        You've got no items yet. You can start shoping{" "}
+        <MuiLink component={Link} to="/" color="primary" underline="none">
+          here
+        </MuiLink>
       </Typography>
     </Box>
   ) : (
