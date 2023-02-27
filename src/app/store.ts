@@ -1,12 +1,14 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import cartReducer from "components/Cart/cartSlice";
-import productsSlice from "components/ProductsList/productsSlice";
+import { apiSlice } from "features/api/apiSlice";
 
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
-    products: productsSlice,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

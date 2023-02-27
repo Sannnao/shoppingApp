@@ -7,9 +7,9 @@ import {
   Typography,
   Rating,
 } from "@mui/material";
+import { formatAsPrice } from "utils";
 import { TrunkText } from "components/TruncText";
 import { CartActions } from "components/CartActions";
-import { formatAsPrice } from "utils";
 import { Description } from "./Description";
 
 export type Product = {
@@ -48,14 +48,9 @@ export const ProductItem = ({ product }: ProductItemProps) => {
           {title}
         </TrunkText>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography
-            gutterBottom
-            variant="h6"
-            component={"h6"}
-            color="text.secondary"
-          >
+          <TrunkText lines={1} gutterBottom variant="h6" color="text.secondary">
             {category}
-          </Typography>
+          </TrunkText>
           <Rating value={rate} />
         </Box>
         <Description description={description} />
