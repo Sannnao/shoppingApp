@@ -1,42 +1,32 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Container";
 import { Spinner } from "components/Spinner";
 import { ProductItem, Product } from "components/ProductItem";
+import { Error } from "components/Error";
+import { fetchProducts, selectProducts } from "./productsSlice";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 
-type ProductsListProps = {};
+export type Products = Product[];
 
-type Products = Product[];
-
-export const ProductsList = ({}: ProductsListProps) => {
-  const [products, setProducts] = useState<null | Products>(null);
-  const isLoading = !products;
+export const ProductsList = () => {
+  const dispatch = useAppDispatch();
+  const products = useAppSelector(selectProducts);
+  const productsStatus = useAppSelector((state) => state.products.status);
+  const isLoading = productsStatus === "loading";
+  const isError = productsStatus === "error";
 
   useEffect(() => {
-    const getProducts = async () => {
-      const res = await fetch("https://fakestoreapi.com/products");
-      const data: Product[] = await res.json();
-      console.log(data);
+    if (productsStatus === "idle") {
+      dispatch(fetchProducts());
+    }
+  }, [productsStatus, dispatch]);
 
-      setProducts(data);
-    };
+  if (isLoading) return <Spinner />;
+  if (isError) {
+    return <Error message={"Something happend while loading Products"} />;
+  }
 
-    getProducts();
-  }, []);
-
-  return isLoading ? (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      <Spinner />
-    </Box>
-  ) : (
+  return (
     <Grid
       container
       spacing={{ xs: 2, md: 3 }}

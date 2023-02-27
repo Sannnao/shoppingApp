@@ -11,15 +11,17 @@ type ProductId = {
   id: number;
 };
 
-type ProductState = ProductItem[];
+type ProductState = {
+  products: ProductItem[];
+};
 
-const initialState: ProductState = [];
+const initialState: ProductState = {
+  products: [],
+};
 
 export const cartSlice = createSlice({
   name: "cartSlice",
-  initialState: {
-    products: initialState,
-  },
+  initialState,
   reducers: {
     addProduct: (state, action: PayloadAction<Product>) => {
       const item = state.products.find(
@@ -57,7 +59,7 @@ export const cartSlice = createSlice({
 
 export const { addProduct, removeProduct, removeProducts } = cartSlice.actions;
 
-export const selectProducts = (state: RootState) => state.cart.products;
+export const selectCartProducts = (state: RootState) => state.cart.products;
 export const selectProductsAmount = (state: RootState) =>
   state.cart.products.reduce((acc, product) => acc + product.amount, 0);
 export const selectTotalPrice = (state: RootState) =>

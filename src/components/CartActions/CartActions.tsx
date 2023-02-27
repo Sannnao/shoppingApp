@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import {
   addProduct,
   removeProduct,
-  selectProducts,
+  selectCartProducts,
 } from "components/Cart/cartSlice";
 import { Product } from "components/ProductItem";
 
@@ -15,7 +15,7 @@ type CartActionsProps = { product: Product };
 
 export const CartActions = ({ product }: CartActionsProps) => {
   const dispatch = useAppDispatch();
-  const products = useAppSelector(selectProducts);
+  const products = useAppSelector(selectCartProducts);
   const foundProduct = products.find((item) => item.product.id === product.id);
   const productAmount = foundProduct ? foundProduct.amount : 0;
 

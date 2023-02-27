@@ -3,7 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { selectProducts, selectTotalPrice, removeProducts } from "./cartSlice";
+import { selectCartProducts, selectTotalPrice, removeProducts } from "./cartSlice";
 import { formatAsPrice } from "utils";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -20,7 +20,7 @@ const tableHeaderItems = ["Image", "Title", "Price", "Amount", "Remove"];
 
 export const Cart = () => {
   const dispatch = useAppDispatch();
-  const products = useAppSelector(selectProducts);
+  const products = useAppSelector(selectCartProducts);
   const totalPrice = useAppSelector(selectTotalPrice);
 
   return !products.length ? (

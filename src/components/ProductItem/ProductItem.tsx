@@ -1,26 +1,19 @@
 import { useState, useRef, useLayoutEffect } from "react";
-import Box from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import Collapse from "@mui/material/Collapse";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import CardActions from "@mui/material/CardActions";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Rating from "@mui/material/Rating";
-import IconButton from "@mui/material/IconButton";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import TextField from "@mui/material/TextField";
+import {
+  Box,
+  Card,
+  Collapse,
+  CardContent,
+  CardMedia,
+  CardActions,
+  Typography,
+  Button,
+  Rating,
+} from "@mui/material";
 import { TrunkText } from "components/TruncText";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { CartActions } from "components/CartActions";
-import {
-  addProduct,
-  removeProduct,
-  selectProducts,
-} from "components/Cart/cartSlice";
+import { selectCartProducts } from "components/Cart/cartSlice";
 import { formatAsPrice } from "utils";
 
 export type Product = {
@@ -37,7 +30,7 @@ type ProductItemProps = { product: Product };
 
 export const ProductItem = ({ product }: ProductItemProps) => {
   const dispatch = useAppDispatch();
-  const products = useAppSelector(selectProducts);
+  const products = useAppSelector(selectCartProducts);
   const foundProduct = products.find((item) => item.product.id === product.id);
   const productAmount = foundProduct ? foundProduct.amount : 0;
   const descriptionTrunkRef = useRef<HTMLSpanElement | null>(null);

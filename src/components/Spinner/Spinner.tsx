@@ -1,10 +1,10 @@
 import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
+import { CenterContainer } from "components/CenterContainer";
 
 export const Spinner = () => {
   return (
-    <Box sx={{ display: "flex" }}>
+    <CenterContainer>
       <CircularProgress />
-    </Box>
+    </CenterContainer>
   );
 };
