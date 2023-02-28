@@ -7,7 +7,7 @@ import { AppThunk } from "app/store";
 import { setItemToLs, removeItemFromLs } from "utils/localStorage";
 import { Product } from "components/ProductItem";
 
-type ProductItem = {
+export type ProductItem = {
   product: Product;
   amount: number;
 };

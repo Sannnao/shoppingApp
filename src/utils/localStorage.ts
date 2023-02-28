@@ -1,17 +1,40 @@
+import { ProductItem } from "components/Cart";
 const BASE_KEY = "storeApp";
 
-export const getItemFromLs = (id: number) => {
-  const item = localStorage.getItem(`${BASE_KEY}.${id}`);
+const getParsedItemsFromLs = (): Record<number, ProductItem> | undefined => {
+  const items = localStorage.getItem(BASE_KEY);
 
-  if (item) {
-    return JSON.parse(item);
+  if (items) {
+    return JSON.parse(items);
   }
 };
 
-export const setItemToLs = <T>(id: number, item: T) => {
-  localStorage.setItem(`${BASE_KEY}.${id}`, JSON.stringify(item));
+const addItemsToLs = (items: unknown) => {
+  localStorage.setItem(BASE_KEY, JSON.stringify(items));
+};
+
+export const getItemsFromLs = () => {
+  return getParsedItemsFromLs();
+};
+
+export const setItemToLs = (id: number, item: ProductItem) => {
+  const items = getParsedItemsFromLs();
+
+  if (items) {
+    items[id] = item;
+
+    addItemsToLs(items);
+  } else {
+    addItemsToLs({ [id]: item });
+  }
 };
 
 export const removeItemFromLs = (id: number) => {
-  localStorage.removeItem(`${BASE_KEY}.${id}`);
+  const items = getParsedItemsFromLs();
+
+  if (items) {
+    delete items[id];
+
+    addItemsToLs(items);
+  }
 };
