@@ -41,6 +41,7 @@ export const Description = ({ description }: DescriptionProps) => {
               ...(!expanded ? { transition: "opacity 500ms" } : {}),
               opacity: expanded ? 1 : 0,
             }}
+            data-testid="expanded"
           >
             {description}
           </Typography>
@@ -57,6 +58,7 @@ export const Description = ({ description }: DescriptionProps) => {
               ...(!expanded ? { transition: "opacity 500ms" } : {}),
               opacity: expanded ? 0 : 1,
             }}
+            data-testid="collapsed"
           >
             {description}
           </TrunkText>
@@ -77,6 +79,7 @@ export const Description = ({ description }: DescriptionProps) => {
                 ? "hidden"
                 : "initial",
           }}
+          data-testid="expandButton"
         >
           {expanded ? "See less" : "Learn More"}
         </Button>
