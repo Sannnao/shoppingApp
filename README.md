@@ -1,4 +1,4 @@
-Deployed version: [here](shoppingapp2023)
+# Deployed version: [here](https://shoppingapp2023.netlify.app/)
 
 # Getting Started with Create React App
 
