@@ -6,8 +6,8 @@ import { Root } from "routes/root";
 import { Cart } from "components/Cart";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { App } from "components/App";
 import "./index.css";
-import { ProductsList } from "components/ProductsList";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     children: [
-      { index: true, element: <ProductsList /> },
+      { index: true, element: <App /> },
       {
         path: "/card",
         element: <Cart />,
