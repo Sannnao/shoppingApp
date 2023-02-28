@@ -13,18 +13,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { formatAsPrice } from "utils";
 import { CartActions } from "components/CartActions";
-import {
-  selectCartProducts,
-  selectTotalPrice,
-  removeProducts,
-} from "./cartSlice";
+import { selectCartProducts, removeProductWithLs } from "./cartSlice";
 
 const tableHeaderItems = ["Image", "Title", "Price", "Amount", "Remove"];
 
 export const CartTable = () => {
   const dispatch = useAppDispatch();
   const products = useAppSelector(selectCartProducts);
-  const totalPrice = useAppSelector(selectTotalPrice);
+  const totalPrice = products.reduce(
+    (acc, product) => acc + product.product.price * product.amount,
+    0
+  );
 
   return (
     <TableContainer component={Paper}>
@@ -65,7 +64,7 @@ export const CartTable = () => {
                 <TableCell align="center">
                   <IconButton
                     aria-label="delete"
-                    onClick={() => dispatch(removeProducts({ id }))}
+                    onClick={() => dispatch(removeProductWithLs({ id }))}
                   >
                     <DeleteIcon />
                   </IconButton>

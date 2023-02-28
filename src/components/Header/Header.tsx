@@ -2,12 +2,16 @@ import AppBar from "@mui/material/AppBar";
 import { Box, Badge, IconButton, Link as MuiLink } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAppSelector } from "app/hooks";
-import { selectProductsAmount } from "components/Cart/cartSlice";
+import { selectCartProducts } from "components/Cart/cartSlice";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 export const Header = () => {
-  const productsAmount = useAppSelector(selectProductsAmount);
+  const cartProducts = useAppSelector(selectCartProducts);
+  const productsAmount = cartProducts.reduce(
+    (acc, product) => acc + product.amount,
+    0
+  );
 
   return (
     <AppBar position="static" component="header" sx={{ padding: "10px 30px" }}>
