@@ -1,19 +1,6 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithProviders } from "utils/test";
+import { renderWithProviders, MOCKED_PRODUCT } from "utils/test";
 import { ProductItem } from "./ProductItem";
-
-const MOCKED_PRODUCT = {
-  id: 1,
-  title: "Title",
-  price: 109.95,
-  description: "Description",
-  category: "men's clothing",
-  image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-  rating: {
-    rate: 3.9,
-    count: 120,
-  },
-};
 
 describe("ProductItem", () => {
   it("renders ProductItem component", async () => {

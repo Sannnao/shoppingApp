@@ -41,7 +41,9 @@ export const CartActions = ({ product }: CartActionsProps) => {
       <IconButton aria-label="remove product" onClick={removeProductFromCart}>
         <RemoveIcon />
       </IconButton>
-      <Typography variant="h6">{productAmount}</Typography>
+      <Typography data-testid="productAmount" variant="h6">
+        {productAmount}
+      </Typography>
       <IconButton aria-label="add product" onClick={addProductToCart}>
         <AddIcon />
       </IconButton>
