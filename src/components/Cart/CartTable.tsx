@@ -33,7 +33,11 @@ export const CartTable = () => {
             {tableHeaderItems.map((item, i) => {
               const isCenter = item === "Amount" || item === "Remove";
               return (
-                <TableCell key={i} {...(isCenter && { align: "center" })}>
+                <TableCell
+                  data-testid="thead"
+                  key={i}
+                  {...(isCenter && { align: "center" })}
+                >
                   {item}
                 </TableCell>
               );
@@ -45,7 +49,7 @@ export const CartTable = () => {
             const { id, image, title, price } = product.product;
 
             return (
-              <TableRow key={id}>
+              <TableRow data-testid='productItem' key={id}>
                 <TableCell>
                   <Avatar
                     src={image}
@@ -54,9 +58,10 @@ export const CartTable = () => {
                         objectFit: "contain",
                       },
                     }}
+                    alt={title}
                   />
                 </TableCell>
-                <TableCell>{title}</TableCell>
+                <TableCell data-testid="title">{title}</TableCell>
                 <TableCell>{formatAsPrice(price)}</TableCell>
                 <TableCell>
                   <CartActions product={product.product} />
