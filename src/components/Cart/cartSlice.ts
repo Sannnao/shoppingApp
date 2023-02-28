@@ -3,8 +3,12 @@ import {
   createEntityAdapter,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { AppThunk } from "app/store";
-import { setItemToLs, removeItemFromLs } from "utils/localStorage";
+import { AppThunk, RootState } from "app/store";
+import {
+  getItemsFromLs,
+  setItemToLs,
+  removeItemFromLs,
+} from "utils/localStorage";
 import { Product } from "components/ProductItem";
 
 export type ProductItem = {
@@ -26,6 +30,9 @@ export const cartSlice = createSlice({
   name: "cartSlice",
   initialState,
   reducers: {
+    setProductsFromLs: (state, action) => {
+      productsAdapter.setAll(state, action.payload);
+    },
     addProduct: (state, action: PayloadAction<ProductItem>) => {
       productsAdapter.setOne(state, action.payload);
     },
@@ -43,8 +50,21 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addProduct, decreaceProductAmount, removeProduct } =
-  cartSlice.actions;
+export const {
+  setProductsFromLs,
+  addProduct,
+  decreaceProductAmount,
+  removeProduct,
+} = cartSlice.actions;
+
+export const loadProductsFromLs = (): AppThunk => (dispatch) => {
+  const lsItems = getItemsFromLs();
+
+  if (lsItems) {
+    const items = Object.values(lsItems);
+    dispatch(setProductsFromLs(items));
+  }
+};
 
 export const addProductWithLs =
   (product: Product): AppThunk =>
@@ -98,7 +118,7 @@ export const removeProductWithLs =
 export const {
   selectAll: selectCartProducts,
   selectById: selectCartProductById,
-} = productsAdapter.getSelectors((state: any) => {
+} = productsAdapter.getSelectors<RootState>((state) => {
   return state.cart;
 });
 
