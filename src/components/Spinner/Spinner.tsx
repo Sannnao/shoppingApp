@@ -4,7 +4,7 @@ import { CenterContainer } from "components/CenterContainer";
 export const Spinner = () => {
   return (
     <CenterContainer>
-      <CircularProgress />
+      <CircularProgress data-testid="spinner" />
     </CenterContainer>
   );
 };
