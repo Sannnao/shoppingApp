@@ -1,7 +1,8 @@
-import { ProductItem } from "components/Cart";
+import { ProductStoreItem } from "features/Cart";
+
 const BASE_KEY = "storeApp";
 
-const getParsedItemsFromLs = (): Record<number, ProductItem> | undefined => {
+const getParsedItemsFromLs = (): Record<number, ProductStoreItem> | undefined => {
   const items = localStorage.getItem(BASE_KEY);
 
   if (items) {
@@ -17,7 +18,7 @@ export const getItemsFromLs = () => {
   return getParsedItemsFromLs();
 };
 
-export const setItemToLs = (id: number, item: ProductItem) => {
+export const setItemToLs = (id: number, item: ProductStoreItem) => {
   const items = getParsedItemsFromLs();
 
   if (items) {

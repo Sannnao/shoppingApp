@@ -11,7 +11,7 @@ import {
 } from "utils/localStorage";
 import { Product } from "components/ProductItem";
 
-export type ProductItem = {
+export type ProductStoreItem = {
   product: Product;
   amount: number;
 };
@@ -20,7 +20,7 @@ type ProductId = {
   id: number;
 };
 
-const productsAdapter = createEntityAdapter<ProductItem>({
+const productsAdapter = createEntityAdapter<ProductStoreItem>({
   selectId: (state) => state.product.id,
 });
 
@@ -33,7 +33,7 @@ export const cartSlice = createSlice({
     setProductsFromLs: (state, action) => {
       productsAdapter.setAll(state, action.payload);
     },
-    addProduct: (state, action: PayloadAction<ProductItem>) => {
+    addProduct: (state, action: PayloadAction<ProductStoreItem>) => {
       productsAdapter.setOne(state, action.payload);
     },
     decreaceProductAmount: (state, action: PayloadAction<ProductId>) => {

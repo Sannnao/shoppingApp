@@ -1,11 +1,10 @@
-import React from "react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { screen } from "@testing-library/react";
-import { renderWithProviders, MOCKED_PRODUCTS_LIST } from "utils/test";
-import { ProductsList } from "./ProductsList";
 import { setupStore } from "app/store";
+import { renderWithProviders, MOCKED_PRODUCTS_LIST } from "utils/test";
 import { apiSlice } from "features/api/apiSlice";
+import { ProductsList } from "./ProductsList";
 
 export const handlers = [
   rest.get("https://fakestoreapi.com/products", (_req, res, ctx) => {

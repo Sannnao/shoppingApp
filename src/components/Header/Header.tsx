@@ -1,10 +1,15 @@
-import AppBar from "@mui/material/AppBar";
-import { Box, Badge, IconButton, Link as MuiLink } from "@mui/material";
+import { Link } from "react-router-dom";
+import {
+  AppBar,
+  Box,
+  Badge,
+  IconButton,
+  Link as MuiLink,
+  Typography,
+} from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAppSelector } from "app/hooks";
-import { selectCartProducts } from "components/Cart/cartSlice";
-import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { selectCartProducts } from "features/Cart/cartSlice";
 
 export const Header = () => {
   const cartProducts = useAppSelector(selectCartProducts);

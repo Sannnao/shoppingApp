@@ -1,7 +1,7 @@
-import { ProductsList } from "components/ProductsList";
-import { useAppDispatch } from "app/hooks";
-import { loadProductsFromLs } from "components/Cart/cartSlice";
 import { useEffect } from "react";
+import { useAppDispatch } from "app/hooks";
+import { ProductsList } from "features/ProductsList";
+import { loadProductsFromLs } from "features/Cart/cartSlice";
 
 export const App = () => {
   const dispatch = useAppDispatch();

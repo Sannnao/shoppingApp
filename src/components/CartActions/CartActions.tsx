@@ -8,7 +8,7 @@ import {
   addProductWithLs,
   decreaceProductAmountWithLs,
   selectCartProductById,
-} from "components/Cart/cartSlice";
+} from "features/Cart/cartSlice";
 import { Product } from "components/ProductItem";
 
 type CartActionsProps = { product: Product };

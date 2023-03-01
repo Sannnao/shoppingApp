@@ -1,11 +1,11 @@
 import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { store } from "app/store";
 import { Root } from "routes/root";
-import { Cart } from "components/Cart";
+import { Cart } from "features/Cart";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { App } from "components/App";
 import "./index.css";
 

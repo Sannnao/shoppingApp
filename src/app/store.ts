@@ -5,7 +5,7 @@ import {
   PreloadedState,
   combineReducers,
 } from "@reduxjs/toolkit";
-import cartReducer from "components/Cart/cartSlice";
+import cartReducer from "features/Cart/cartSlice";
 import { apiSlice } from "features/api/apiSlice";
 
 const rootReducer = combineReducers({

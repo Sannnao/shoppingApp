@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, Typography, Link as MuiLink } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "app/hooks";
 import { selectCartProducts, loadProductsFromLs } from "./cartSlice";
 import { CartTable } from "./CartTable";
-import { useEffect } from "react";
 
 export const Cart = () => {
   const cartProducts = useAppSelector(selectCartProducts);

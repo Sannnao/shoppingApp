@@ -1,4 +1,4 @@
-import { Products } from "components/ProductsList";
+import { Products } from "features/ProductsList";
 
 const BASE_URL = "https://fakestoreapi.com";
 
